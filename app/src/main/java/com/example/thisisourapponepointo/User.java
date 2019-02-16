@@ -10,6 +10,15 @@ public class User extends RealmObject {
     private String firstName;
     private String lastName;
     private String major;
+    private int attendance;
+
+    public void setAttendance(int attendance) {
+        this.attendance = attendance;
+    }
+
+    public int getAttendance() {
+        return attendance;
+    }
 
     public void setMajor(String major) {
         this.major = major;

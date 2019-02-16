@@ -52,10 +52,11 @@ public class SignUp extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
                 if (signUpTxt.equals("Successfully signed up!")) {
                     realm.beginTransaction();
+                    user.setAttendance(user.getAttendance() + 1);
                     realm.copyToRealmOrUpdate(user);
                     realm.commitTransaction();
                     Intent intent = new Intent();
-                    intent.setClass(SignUp.this, MainActivity.class);
+                    intent.setClass(SignUp.this, DrawerActivity.class);
                     startActivity(intent);
                 }
             }
@@ -111,8 +112,6 @@ public class SignUp extends AppCompatActivity {
             realm.commitTransaction();
             return "Successfully signed up!";
         }
-
-        //test
     }
 
 
