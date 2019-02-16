@@ -111,6 +111,8 @@ public class SignUp extends AppCompatActivity {
             realm.commitTransaction();
             return "Successfully signed up!";
         }
+
+        //test
     }
 
 
