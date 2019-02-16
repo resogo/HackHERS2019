@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_my_qr_code"
+            android:title="@string/nav_header_my_qr_code" />
+        <item
+            android:id="@+id/nav_eboard_list"
+            android:title="@string/nav_header_eboard_list" />
+        <item
+            android:id="@+id/nav_events"
+            android:title="@string/nav_header_events" />
+        <item
+            android:id="@+id/nav_mentor"
+            android:title="@string/nav_header_mentor" />
+        <item
+            android:id="@+id/nav_suggestions"
+            android:title="@string/nav_header_suggestions" />
+        <item
+            android:id="@+id/nav_social_media"
+            android:title="@string/nav_header_social_media" />
+        <item
+            android:id="@+id/nav_apparel"
+            android:title="@string/nav_header_apparel" />
+        <item
+            android:id="@+id/nav_eboard_login"
+            android:title="@string/nav_header_eboard_login" />
+        <item
+            android:id="@+id/nav_qr_scanner"
+            android:title="@string/nav_header_qr_scanner" />
+    </group>
+</menu>
