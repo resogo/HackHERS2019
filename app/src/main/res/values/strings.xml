@@ -31,4 +31,7 @@
     <string name="nav_header_apparel">Apparel</string>
     <string name="nav_header_eboard_login">My QR Code</string>
     <string name="nav_header_qr_scanner">Scanner</string>
+    <string name="nav_header_signin">Sign In</string>
+    <string name="nav_header_signup">Sign Up</string>
+
 </resources>

@@ -113,8 +113,4 @@ public class SignUp extends AppCompatActivity {
             return "Successfully signed up!";
         }
     }
-
-
-
-
 }
