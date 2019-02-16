@@ -20,6 +20,7 @@ public class SignUp extends AppCompatActivity {
     private String firstName;
     private String lastName;
     private String email;
+    private String major;
 
     private Button signUpButton;
     private EditText firstNameTxt;
@@ -39,6 +40,7 @@ public class SignUp extends AppCompatActivity {
         firstNameTxt = (EditText) findViewById(R.id.input_first_name);
         lastNameTxt = (EditText) findViewById(R.id.input_last_name);
         emailTxt = (EditText) findViewById(R.id.input_email);
+        majorSpinner = (Spinner) findViewById(R.id.major_dropdown);
 
 
         signUpButton = (Button) findViewById(R.id.button_sign_up);
@@ -85,6 +87,14 @@ public class SignUp extends AppCompatActivity {
             emailTxt.requestFocus();
             emailTxt.selectAll();
             return "Please enter an email";
+        } else {
+            email = String.valueOf(emailTxt.getText());
+        }
+
+        if(!majorSpinner.isSelected() || majorSpinner.getSelectedItem().toString().equals("Select your major")){
+            return "Please select your major";
+        } else {
+            major = String.valueOf(majorSpinner.getSelectedItem());
         }
 
         user = realm.where(User.class).equalTo("email", email).findFirst();
@@ -96,6 +106,7 @@ public class SignUp extends AppCompatActivity {
             user.setEmail(email);
             user.setFirstName(firstName);
             user.setLastName(lastName);
+            user.setMajor(major);
             realm.copyToRealmOrUpdate(user);
             realm.commitTransaction();
             return "Successfully signed up!";

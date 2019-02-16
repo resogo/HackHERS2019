@@ -9,6 +9,15 @@ public class User extends RealmObject {
     private String email;
     private String firstName;
     private String lastName;
+    private String major;
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getMajor() {
+        return major;
+    }
 
     public void setEmail(String email) {
         this.email = email;
