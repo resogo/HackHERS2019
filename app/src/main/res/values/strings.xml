@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">ThisIsOurAppOnePointO</string>
+
+    <string-array name="majors">
+        <item>Select your major</item>
+        <item>Aerospace Engineering</item>
+        <item>Applied Sciences in Engineering</item>
+        <item>Bioenvironmental Engineering</item>
+        <item>Biomedical Engineering</item>
+        <item>Chemical and Biochemical Engineering</item>
+        <item>Civil and Environmental Engineering</item>
+        <item>Electrical and Computer Engineering</item>
+        <item>Industrial and Systems Engineering</item>
+        <item>Materials Science and Engineering</item>
+        <item>Mechanical Engineering</item>
+        <item>Undecided</item>
+        <item>Other</item>
+    </string-array>
 </resources>
