@@ -88,7 +88,7 @@ public class SignUp extends android.app.Fragment {
             email = String.valueOf(emailTxt.getText());
         }
 
-        if(!majorSpinner.isSelected() || majorSpinner.getSelectedItem().toString().equals("Select your major")){
+        if(majorSpinner.getSelectedItem().toString().equals("Select your major")){
             return "Please select your major";
         } else {
             major = String.valueOf(majorSpinner.getSelectedItem());
@@ -106,6 +106,8 @@ public class SignUp extends android.app.Fragment {
             user.setMajor(major);
             realm.copyToRealmOrUpdate(user);
             realm.commitTransaction();
+            MyApplication.myUser = user;
+
             return "Successfully signed up!";
         }
     }

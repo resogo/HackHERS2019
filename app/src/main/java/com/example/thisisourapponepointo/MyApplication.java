@@ -10,6 +10,8 @@ import io.realm.RealmConfiguration;
 
 public class MyApplication extends Application {
 
+    public static User myUser;
+
     Realm realm;
 
     @Override

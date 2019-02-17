@@ -69,6 +69,8 @@ public class SignIn extends android.app.Fragment {
 
         user = realm.where(User.class).equalTo("email", email).findFirst();
         if (user != null) {
+            MyApplication.myUser = user;
+
             return "Successfully signed in!";
         } else {
             return "Email is incorrect or user does not exist. Please try again or sign up.";
