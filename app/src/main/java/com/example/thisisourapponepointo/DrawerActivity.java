@@ -1,10 +1,14 @@
 package com.example.thisisourapponepointo;
 
-import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 
 public class DrawerActivity extends AppCompatActivity {
@@ -13,8 +17,6 @@ public class DrawerActivity extends AppCompatActivity {
     android.app.FragmentManager fragMan;
     android.app.FragmentTransaction fragTransaction;
     QRReaderFragment qrReaderFragment;
-    SignIn signInFragment;
-    SignUp signUpFragment;
     private int mainLayout;
 
     @Override
@@ -26,6 +28,11 @@ public class DrawerActivity extends AppCompatActivity {
         fragMan = getFragmentManager();
         mainLayout = R.id.content_frame;
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
@@ -42,9 +49,6 @@ public class DrawerActivity extends AppCompatActivity {
                         switch (id){
                             case R.id.nav_qr_scanner: setupQRScanner();
                                 break;
-                            case R.id.nav_signin: setupSignIn();
-                                break;
-                            case R.id.nav_signup: setupSignUp();
                         }
 
 
@@ -57,16 +61,13 @@ public class DrawerActivity extends AppCompatActivity {
         fragTransaction.replace(mainLayout, qrReaderFragment, null);
         fragTransaction.commit();
     }
-
-    public void setupSignIn(){
-        fragTransaction = fragMan.beginTransaction();
-        fragTransaction.replace(mainLayout, signInFragment, null);
-        fragTransaction.commit();
-    }
-
-    public void setupSignUp(){
-        fragTransaction = fragMan.beginTransaction();
-        fragTransaction.replace(mainLayout, signUpFragment, null);
-        fragTransaction.commit();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

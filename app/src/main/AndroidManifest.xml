@@ -9,7 +9,7 @@
         android:label="MyClub"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         <activity android:name=".SignUp"></activity>
         <activity android:name=".SignIn" />
         <activity android:name=".DrawerActivity">
