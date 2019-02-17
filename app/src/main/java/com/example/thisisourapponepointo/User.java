@@ -1,7 +1,5 @@
 package com.example.thisisourapponepointo;
 
-import android.graphics.Bitmap;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -12,7 +10,7 @@ public class User extends RealmObject {
     private String firstName;
     private String lastName;
     private String major;
-    private Bitmap QRcode;
+    private byte[] QRcode;
     private int attendance;
 
     public void setAttendance(int attendance) {
@@ -55,11 +53,11 @@ public class User extends RealmObject {
         return lastName;
     }
 
-    public Bitmap getQRcode() {
+    public byte[] getQRcode() {
         return QRcode;
     }
 
-    public void setQRcode(Bitmap QRcode) {
+    public void setQRcode(byte[] QRcode) {
         this.QRcode = QRcode;
     }
 }

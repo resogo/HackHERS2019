@@ -37,9 +37,6 @@ public class MyApplication extends Application {
     }
 
     public void onTerminate() {
-        realm.beginTransaction();
-
-        realm.commitTransaction();
 
         super.onTerminate();
     }

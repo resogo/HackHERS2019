@@ -1,6 +1,5 @@
 package com.example.thisisourapponepointo;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -13,16 +12,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 
 import io.realm.Realm;
 
@@ -67,12 +61,16 @@ public class SignUp extends android.app.Fragment {
                         Toast.LENGTH_LONG).show();
                 if (signUpTxt.equals("Successfully signed up!")) {
                     realm.beginTransaction();
-                    user.setAttendance(user.getAttendance() + 1);
+                    user.setFirstName(firstName);
+                    user.setLastName(lastName);
+                    user.setEmail(email);
+                    user.setAttendance(1);
                     realm.copyToRealmOrUpdate(user);
                     realm.commitTransaction();
-                    Intent intent = new Intent();
-                    intent.setClass(getActivity(), DrawerActivity.class);
-                    startActivity(intent);
+                    MyApplication.myUser = user;
+
+                    getActivity().getFragmentManager().popBackStack();
+                    //beginTransaction().replace( new Home(), null).commit();
                 }
             }
         });
@@ -119,22 +117,23 @@ public class SignUp extends android.app.Fragment {
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setMajor(major);
-            String data = "NAME: "+firstName+ " "+lastName+"EMAIL: "+email;
-            urlInfo = "http://api.qrserver.com/v1/create-qr-code/?data="+data+"&size=100x100";
-            GetImage getImage = new GetImage();
-            getImage.execute(urlInfo);
             realm.copyToRealmOrUpdate(user);
             realm.commitTransaction();
+            String data = "NAME: "+firstName+ " "+lastName+"EMAIL: "+email;
+            urlInfo = "http://api.qrserver.com/v1/create-qr-code/?data="+data+"&size=50x50";
+            GetImage getImage = new GetImage();
+            getImage.execute(urlInfo);
             MyApplication.myUser = user;
 
             return "Successfully signed up!";
         }
     }
-    private class GetImage extends  AsyncTask<String,Void, Bitmap>{
+    private class GetImage extends  AsyncTask<String,Void, byte[]>{
 
         @Override
-        protected Bitmap doInBackground(String... strings) {
+        protected byte[] doInBackground(String... params) {
             Bitmap myBitmap = null;
+            byte[] imgArray = null;
 
             try {
                 URL imgURL = new URL(urlInfo);
@@ -143,18 +142,25 @@ public class SignUp extends android.app.Fragment {
                 connection.connect();
                 InputStream input = connection.getInputStream();
                 myBitmap = BitmapFactory.decodeStream(input);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                myBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                imgArray = stream.toByteArray();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return myBitmap;
+            return imgArray;
         }
 
         @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
+        protected void onPostExecute(byte[] img) {
+            super.onPostExecute(img);
             //bitmap generated (QRCode = bitmap)
 
-            user.setQRcode(bitmap);
+            realm.beginTransaction();
+            user.setQRcode(img);
+            System.out.print(img);
+            realm.copyToRealmOrUpdate(user);
+            realm.commitTransaction();
 
         }
     }

@@ -1,7 +1,7 @@
 package com.example.thisisourapponepointo;
 
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +14,7 @@ import io.realm.Realm;
 
 public class Home extends android.app.Fragment{
     ImageView qrcodeDisplay;
-    Bitmap QRCode;
+    byte[] QRCode;
     Realm realm;
     User user;
     Button signout;
@@ -30,9 +30,14 @@ public class Home extends android.app.Fragment{
         //get Bitmap from data base if user is logged in
         //use CURRENT user DATA
         //user = realm.where(User.class).equalTo("email", email).findFirst();
-        realm.beginTransaction();
-        QRCode = myUser.getQRcode();
-        qrcodeDisplay.setImageBitmap(QRCode);
+
+        if(myUser!=null){
+            QRCode = myUser.getQRcode();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(QRCode, 0, QRCode.length);
+            qrcodeDisplay.setImageBitmap(bitmap);
+        }
+
+
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

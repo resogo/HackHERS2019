@@ -48,6 +48,7 @@ public class SignIn extends android.app.Fragment {
                     Intent intent = new Intent();
                     intent.setClass(getActivity(), DrawerActivity.class);
                     startActivity(intent);
+                    MyApplication.myUser = user;
                 }
             }
         });
