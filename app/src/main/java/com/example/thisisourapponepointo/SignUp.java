@@ -1,6 +1,9 @@
 package com.example.thisisourapponepointo;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 
 import io.realm.Realm;
 
@@ -28,6 +42,7 @@ public class SignUp extends android.app.Fragment {
     private EditText lastNameTxt;
     private EditText emailTxt;
     private Spinner majorSpinner;
+    private String urlInfo;
 
     private String signUpTxt;
 
@@ -104,11 +119,43 @@ public class SignUp extends android.app.Fragment {
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setMajor(major);
+            String data = "NAME: "+firstName+ " "+lastName+"EMAIL: "+email;
+            urlInfo = "http://api.qrserver.com/v1/create-qr-code/?data="+data+"&size=100x100";
+            GetImage getImage = new GetImage();
+            getImage.execute(urlInfo);
             realm.copyToRealmOrUpdate(user);
             realm.commitTransaction();
             MyApplication.myUser = user;
 
             return "Successfully signed up!";
+        }
+    }
+    private class GetImage extends  AsyncTask<String,Void, Bitmap>{
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            Bitmap myBitmap = null;
+
+            try {
+                URL imgURL = new URL(urlInfo);
+                HttpURLConnection connection = (HttpURLConnection) imgURL.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                myBitmap = BitmapFactory.decodeStream(input);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return myBitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            //bitmap generated (QRCode = bitmap)
+
+            user.setQRcode(bitmap);
+
         }
     }
 }

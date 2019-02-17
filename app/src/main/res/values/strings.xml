@@ -29,9 +29,10 @@
     <string name="nav_header_suggestions">Suggestions and Messages</string>
     <string name="nav_header_social_media">Social Media Links</string>
     <string name="nav_header_apparel">Apparel</string>
-    <string name="nav_header_eboard_login">My QR Code</string>
+    <string name="nav_header_eboard_login">Eboard Login</string>
     <string name="nav_header_qr_scanner">Scanner</string>
     <string name="nav_header_signin">Sign In</string>
     <string name="nav_header_signup">Sign Up</string>
+    <string name="nav_header_home">Home</string>
 
 </resources>

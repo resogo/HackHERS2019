@@ -64,7 +64,7 @@ public class SignIn extends android.app.Fragment {
         if (isEmpty(emailTxt)) {
             return "Please enter an email";
         } else {
-            email = email = String.valueOf(emailTxt.getText());
+            email =  String.valueOf(emailTxt.getText());
         }
 
         user = realm.where(User.class).equalTo("email", email).findFirst();

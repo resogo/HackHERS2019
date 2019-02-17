@@ -18,6 +18,7 @@ public class DrawerActivity extends AppCompatActivity {
     QRReaderFragment qrReaderFragment;
     private int mainLayout;
     SignIn signInFragment;
+    Home homeFragment;
     SignUp signUpFragment;
 
     @Override
@@ -29,6 +30,8 @@ public class DrawerActivity extends AppCompatActivity {
         fragMan = getFragmentManager();
         signInFragment = new SignIn();
         signUpFragment = new SignUp();
+        qrReaderFragment = new QRReaderFragment();
+        homeFragment = new Home();
         mainLayout = R.id.content_frame;
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -38,6 +41,7 @@ public class DrawerActivity extends AppCompatActivity {
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+        setupHome();
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -55,6 +59,9 @@ public class DrawerActivity extends AppCompatActivity {
                             case R.id.nav_signin: setupSignIn();
                                 break;
                             case R.id.nav_signup: setupSignUp();
+                                break;
+                            case R.id.nav_home: setupHome();
+                                break;
                         }
                         return true;
                     }
@@ -68,6 +75,11 @@ public class DrawerActivity extends AppCompatActivity {
             navigationView.getMenu().findItem(R.id.nav_signup).setVisible(false);
         }
 
+    }
+    public void setupHome(){
+        fragTransaction = fragMan.beginTransaction();
+        fragTransaction.replace(mainLayout, qrReaderFragment, null);
+        fragTransaction.commit();
     }
     public void setupQRScanner(){
         fragTransaction = fragMan.beginTransaction();
