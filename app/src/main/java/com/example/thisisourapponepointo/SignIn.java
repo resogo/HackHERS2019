@@ -31,7 +31,7 @@ public class SignIn extends android.app.Fragment {
 
         realm = Realm.getDefaultInstance();
 
-        emailTxt = (EditText) rootView.findViewById(R.id.input_email);
+        emailTxt = (EditText) rootView.findViewById(R.id.input_email_signin);
 
 
         signInButton = (Button) rootView.findViewById(R.id.button_sign_in);

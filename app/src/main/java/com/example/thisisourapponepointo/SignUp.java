@@ -39,7 +39,7 @@ public class SignUp extends android.app.Fragment {
 
         firstNameTxt = (EditText) rootView.findViewById(R.id.input_first_name);
         lastNameTxt = (EditText) rootView.findViewById(R.id.input_last_name);
-        emailTxt = (EditText) rootView.findViewById(R.id.input_email);
+        emailTxt = (EditText) rootView.findViewById(R.id.input_email_signup);
         majorSpinner = (Spinner) rootView.findViewById(R.id.major_dropdown);
 
 
