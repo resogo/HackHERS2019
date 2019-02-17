@@ -2,15 +2,16 @@ package com.example.thisisourapponepointo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import io.realm.Realm;
 
-public class SignIn extends AppCompatActivity {
+public class SignIn extends android.app.Fragment {
 
     Realm realm;
 
@@ -24,29 +25,28 @@ public class SignIn extends AppCompatActivity {
     private String signInTxt;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_sign_in, container, false);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
 
         realm = Realm.getDefaultInstance();
 
-        emailTxt = (EditText) findViewById(R.id.input_email);
+        emailTxt = (EditText) rootView.findViewById(R.id.input_email);
 
 
-        signInButton = (Button) findViewById(R.id.button_sign_up);
+        signInButton = (Button) rootView.findViewById(R.id.button_sign_up);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signInTxt = signIn();
-                Toast.makeText(SignIn.this, signInTxt,
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), signInTxt, Toast.LENGTH_LONG).show();
                 if (signInTxt.equals("Successfully signed in!")) {
                     realm.beginTransaction();
                     user.setAttendance(user.getAttendance() + 1);
                     realm.copyToRealmOrUpdate(user);
                     realm.commitTransaction();
                     Intent intent = new Intent();
-                    intent.setClass(SignIn.this, DrawerActivity.class);
+                    intent.setClass(getActivity(), DrawerActivity.class);
                     startActivity(intent);
                 }
             }
