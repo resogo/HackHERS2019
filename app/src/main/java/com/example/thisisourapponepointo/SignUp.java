@@ -120,7 +120,8 @@ public class SignUp extends android.app.Fragment {
             realm.copyToRealmOrUpdate(user);
             realm.commitTransaction();
             String data = "NAME: "+firstName+ " "+lastName+"EMAIL: "+email;
-            urlInfo = "http://api.qrserver.com/v1/create-qr-code/?data="+data+"&size=50x50";
+            System.out.print(data);
+            urlInfo = "http://api.qrserver.com/v1/create-qr-code/?data="+data+"&size=100x100";
             GetImage getImage = new GetImage();
             getImage.execute(urlInfo);
             MyApplication.myUser = user;

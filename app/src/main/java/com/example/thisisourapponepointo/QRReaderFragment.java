@@ -51,7 +51,6 @@ public class QRReaderFragment extends android.app.Fragment {
     private void displayToast() {
         if(getActivity() != null && toast != null) {
             Toast.makeText(getActivity(), toast, Toast.LENGTH_LONG).show();
-            barcodeValue.setText(userEmail);
             toast = null;
         }
     }
@@ -65,7 +64,8 @@ public class QRReaderFragment extends android.app.Fragment {
             } else {
                 toast = "Scanned from fragment";
                 info = result.getContents();
-                parseBarcodeData();
+                userEmail = info.substring(info.indexOf("EMAIL: ")+7);
+                userName = info.substring(info.indexOf("NAME: ")+6, info.indexOf("EMAIL: "));
                 String success = "Successfully scanned "+userName+". Email: " + userEmail;
                 barcodeValue.setText(success);
             }
@@ -73,9 +73,5 @@ public class QRReaderFragment extends android.app.Fragment {
             // At this point we may or may not have a reference to the activity
             displayToast();
         }
-    }
-    public void parseBarcodeData(){
-        userEmail = info.substring(info.indexOf("EMAIL: ")+7);
-        userName = info.substring(info.indexOf("NAME: ")+6, info.indexOf("EMAIL: "));
     }
 }
