@@ -6,9 +6,9 @@ import android.net.Uri;
 public class EBoardMemberItem {
     private String title;
     private String description;
-    private Uri image;
+    private byte[] image;
 
-    public EBoardMemberItem(String t, String d, Uri img){
+    public EBoardMemberItem(String t, String d, byte[] img){
         title = t;
         description = d;
         image = img;
@@ -18,7 +18,7 @@ public class EBoardMemberItem {
         this.description = description;
     }
 
-    public void setImage(Uri image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
@@ -26,7 +26,7 @@ public class EBoardMemberItem {
         this.title = title;
     }
 
-    public Uri getImage() {
+    public byte[] getImage() {
         return image;
     }
 

@@ -12,12 +12,12 @@ import android.widget.Toast;
 public class SuggestionFragment extends android.app.Fragment {
     View rootView;
     String suggestion;
-    EditText suggestionTxt = rootView.findViewById(R.id.editText_suggestion);
+    EditText suggestionTxt;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_suggestions, container, false);
         super.onCreate(savedInstanceState);
-
+        suggestionTxt = rootView.findViewById(R.id.editText_suggestion);
         Button submit = rootView.findViewById(R.id.submit_button);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

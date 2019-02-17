@@ -7,11 +7,13 @@ import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmList;
 
 public class MyApplication extends Application {
 
     public static User myUser;
-    public static EboardInfo eboard;
+    public static EboardInfo eboard = new EboardInfo();
+    public static RealmList<EBoardMemberItem> realmList = new RealmList<>();
 
     Realm realm;
 
