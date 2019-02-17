@@ -11,7 +11,7 @@ import io.realm.RealmConfiguration;
 public class MyApplication extends Application {
 
     public static User myUser;
-    public static boolean isEBoard = false;
+    public static EboardInfo eboard;
 
     Realm realm;
 
@@ -34,6 +34,11 @@ public class MyApplication extends Application {
                         .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
                         .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
                         .build());
+
+        realm.beginTransaction();
+        eboard.setPassword("sweasel");
+        realm.copyToRealmOrUpdate(eboard);
+        realm.commitTransaction();
 
     }
 

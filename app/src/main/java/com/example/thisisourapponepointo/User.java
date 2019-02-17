@@ -12,6 +12,15 @@ public class User extends RealmObject {
     private String major;
     private byte[] QRcode;
     private int attendance;
+    boolean isEBoard = false;
+
+    public void setEBoard(boolean EBoard) {
+        isEBoard = EBoard;
+    }
+
+    public boolean isEBoard() {
+        return isEBoard;
+    }
 
     public void setAttendance(int attendance) {
         this.attendance = attendance;
