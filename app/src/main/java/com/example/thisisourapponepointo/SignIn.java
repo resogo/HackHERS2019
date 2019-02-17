@@ -34,7 +34,7 @@ public class SignIn extends android.app.Fragment {
         emailTxt = (EditText) rootView.findViewById(R.id.input_email);
 
 
-        signInButton = (Button) rootView.findViewById(R.id.button_sign_up);
+        signInButton = (Button) rootView.findViewById(R.id.button_sign_in);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,8 +62,6 @@ public class SignIn extends android.app.Fragment {
     public String signIn() {
 
         if (isEmpty(emailTxt)) {
-            emailTxt.requestFocus();
-            emailTxt.selectAll();
             return "Please enter an email";
         } else {
             email = email = String.valueOf(emailTxt.getText());
@@ -73,8 +71,6 @@ public class SignIn extends android.app.Fragment {
         if (user != null) {
             return "Successfully signed in!";
         } else {
-            emailTxt.requestFocus();
-            emailTxt.selectAll();
             return "Email is incorrect or user does not exist. Please try again or sign up.";
         }
     }

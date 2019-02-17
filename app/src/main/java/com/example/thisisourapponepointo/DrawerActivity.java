@@ -18,6 +18,8 @@ public class DrawerActivity extends AppCompatActivity {
     android.app.FragmentTransaction fragTransaction;
     QRReaderFragment qrReaderFragment;
     private int mainLayout;
+    SignIn signInFragment;
+    SignUp signUpFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,8 @@ public class DrawerActivity extends AppCompatActivity {
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         fragMan = getFragmentManager();
+        signInFragment = new SignIn();
+        signUpFragment = new SignUp();
         mainLayout = R.id.content_frame;
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -49,6 +53,9 @@ public class DrawerActivity extends AppCompatActivity {
                         switch (id){
                             case R.id.nav_qr_scanner: setupQRScanner();
                                 break;
+                            case R.id.nav_signin: setupSignIn();
+                                break;
+                            case R.id.nav_signup: setupSignUp();
                         }
 
 
@@ -61,6 +68,17 @@ public class DrawerActivity extends AppCompatActivity {
         fragTransaction.replace(mainLayout, qrReaderFragment, null);
         fragTransaction.commit();
     }
+    public void setupSignIn(){
+        fragTransaction = fragMan.beginTransaction();
+        fragTransaction.replace(mainLayout, signInFragment, null);
+        fragTransaction.commit();
+    }
+
+    public void setupSignUp() {
+        fragTransaction = fragMan.beginTransaction();
+        fragTransaction.replace(mainLayout, signUpFragment, null);
+        fragTransaction.commit();
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -70,4 +88,5 @@ public class DrawerActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

@@ -71,24 +71,18 @@ public class SignUp extends android.app.Fragment {
 
     public String signUp() {
         if (isEmpty(firstNameTxt)) {
-            firstNameTxt.requestFocus();
-            firstNameTxt.selectAll();
             return "Please enter your first name";
         } else {
             firstName = String.valueOf(firstNameTxt.getText());
         }
 
         if (isEmpty(lastNameTxt)) {
-            lastNameTxt.requestFocus();
-            lastNameTxt.selectAll();
             return "Please enter your last name";
         } else {
             lastName = String.valueOf(lastNameTxt.getText());
         }
 
         if (isEmpty(emailTxt)) {
-            emailTxt.requestFocus();
-            emailTxt.selectAll();
             return "Please enter an email";
         } else {
             email = String.valueOf(emailTxt.getText());
