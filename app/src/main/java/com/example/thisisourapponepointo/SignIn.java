@@ -51,6 +51,8 @@ public class SignIn extends android.app.Fragment {
                 }
             }
         });
+
+        return rootView;
     }
 
     private boolean isEmpty(EditText myeditText) {
@@ -63,6 +65,8 @@ public class SignIn extends android.app.Fragment {
             emailTxt.requestFocus();
             emailTxt.selectAll();
             return "Please enter an email";
+        } else {
+            email = email = String.valueOf(emailTxt.getText());
         }
 
         user = realm.where(User.class).equalTo("email", email).findFirst();

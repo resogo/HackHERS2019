@@ -2,8 +2,9 @@ package com.example.thisisourapponepointo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -11,7 +12,7 @@ import android.widget.Toast;
 
 import io.realm.Realm;
 
-public class SignUp extends AppCompatActivity {
+public class SignUp extends android.app.Fragment {
 
     Realm realm;
 
@@ -30,25 +31,24 @@ public class SignUp extends AppCompatActivity {
 
     private String signUpTxt;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_sign_up, container, false);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
 
         realm = Realm.getDefaultInstance();
 
-        firstNameTxt = (EditText) findViewById(R.id.input_first_name);
-        lastNameTxt = (EditText) findViewById(R.id.input_last_name);
-        emailTxt = (EditText) findViewById(R.id.input_email);
-        majorSpinner = (Spinner) findViewById(R.id.major_dropdown);
+        firstNameTxt = (EditText) rootView.findViewById(R.id.input_first_name);
+        lastNameTxt = (EditText) rootView.findViewById(R.id.input_last_name);
+        emailTxt = (EditText) rootView.findViewById(R.id.input_email);
+        majorSpinner = (Spinner) rootView.findViewById(R.id.major_dropdown);
 
 
-        signUpButton = (Button) findViewById(R.id.button_sign_up);
+        signUpButton = (Button) rootView.findViewById(R.id.button_sign_up);
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signUpTxt = signUp();
-                Toast.makeText(SignUp.this, signUpTxt,
+                Toast.makeText(getActivity(), signUpTxt,
                         Toast.LENGTH_LONG).show();
                 if (signUpTxt.equals("Successfully signed up!")) {
                     realm.beginTransaction();
@@ -56,11 +56,13 @@ public class SignUp extends AppCompatActivity {
                     realm.copyToRealmOrUpdate(user);
                     realm.commitTransaction();
                     Intent intent = new Intent();
-                    intent.setClass(SignUp.this, DrawerActivity.class);
+                    intent.setClass(getActivity(), DrawerActivity.class);
                     startActivity(intent);
                 }
             }
         });
+
+        return rootView;
     }
 
     private boolean isEmpty(EditText myeditText) {
