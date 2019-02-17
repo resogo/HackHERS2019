@@ -2,7 +2,6 @@ package com.example.thisisourapponepointo;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +19,14 @@ public class QRReaderFragment extends android.app.Fragment {
     private String toast;
     private String info;
     private String userEmail;
+    private String userName;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.qrcode_reader_layout, container, false);
         super.onCreate(savedInstanceState);
         context = rootView.getContext();
         barcodeValue = (TextView) rootView.findViewById(R.id.display_scanned_info);
         userEmail = "";
+        userName = "";
         Button scan = (Button) rootView.findViewById(R.id.capture_qrcode);
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +67,8 @@ public class QRReaderFragment extends android.app.Fragment {
                 toast = "Scanned from fragment";
                 info = result.getContents();
                 parseBarcodeData();
+                String success = "Successfully scanned "+userName+". Email: " + userEmail;
+                barcodeValue.setText(success);
             }
 
             // At this point we may or may not have a reference to the activity
@@ -73,6 +76,7 @@ public class QRReaderFragment extends android.app.Fragment {
         }
     }
     public void parseBarcodeData(){
-        userEmail = info.substring(info.indexOf("mailto:")+7);
+        userEmail = info.substring(info.indexOf("EMAIL: ")+7);
+        userName = info.substring(info.indexOf("NAME: ")+6, info.indexOf("EMAIL: "));
     }
 }

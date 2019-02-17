@@ -11,9 +11,6 @@
             android:id="@+id/nav_signin"
             android:title="@string/nav_header_signin" />
         <item
-            android:id="@+id/nav_my_qr_code"
-            android:title="@string/nav_header_my_qr_code" />
-        <item
             android:id="@+id/nav_eboard_list"
             android:title="@string/nav_header_eboard_list" />
         <item
