@@ -11,6 +11,7 @@ import io.realm.RealmConfiguration;
 public class MyApplication extends Application {
 
     public static User myUser;
+    public static boolean isEBoard = false;
 
     Realm realm;
 
